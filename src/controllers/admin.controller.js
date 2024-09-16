@@ -63,9 +63,9 @@ export const addComplaint = asyncHandler(async (req, res) => {
 
     const updatedE = await User.findByIdAndUpdate(
       electricians[0]._id,
-      { $inc: { counter: 1 } },
+      { $set: { status: "occupied" }, $inc: { counter: 1 } },
       { new: true }
-    )
+    );
 
     if (!updatedE) {
       return res.json(new ApiResponse(400, "Complaint not added, error in incrementing count"));
