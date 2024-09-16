@@ -135,7 +135,7 @@ export const getClosedComplaints = asyncHandler(async (req, res) => {
 
 export const deleteElectrician = asyncHandler(async (req, res) => {
   try {
-    const electricianId = req.params;
+    const {electricianId} = req.query;
     const electrician = await User.findByIdAndDelete(electricianId);
     if (!electrician) {
       return res.json(new ApiResponse(400, "Electrician not found"));
@@ -148,7 +148,7 @@ export const deleteElectrician = asyncHandler(async (req, res) => {
 
 export const deleteComplaint = asyncHandler(async (req, res) => {
   try {
-    const complaintId = req.params;
+    const {complaintId} = req.query;
     const complaint = await Complaint.findByIdAndDelete(complaintId);
     if (!complaint) {
       return res.json(new ApiResponse(400, "Complaint not found"));
