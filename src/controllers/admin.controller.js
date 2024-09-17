@@ -158,3 +158,42 @@ export const deleteComplaint = asyncHandler(async (req, res) => {
     return res.json(new ApiResponse(500, error, "internal server error"));
   }
 })
+
+export const loginElectrician = asyncHandler(async (req, res) => {
+  try {
+    const { phone, password } = req.query;
+
+    if (!phone || !password) {
+      return res.json(new ApiResponse(400, "Please provide phone and password"));
+    }
+
+    const electrician = await User.findOne({ phone: phone });
+
+    if (!electrician) {
+      return res.json(new ApiResponse(400, "Electrician not found"));
+    }
+
+    if (electrician.password !== password) {
+      return res.json(new ApiResponse(400, "Incorrect password"));
+    }
+
+    return res.json(
+      new ApiResponse(200, electrician, "Login successful")
+    );
+  } catch (error) {
+    return res.json(new ApiResponse(500, error, "internal server error"));
+  }
+})
+
+export const getElectricianById = asyncHandler(async (req, res) => {
+  try {
+    const { electricianId } = req.query;
+    const electrician = await User.findById(electricianId);
+    if (!electrician) {
+      return res.json(new ApiResponse(400, "Electrician not found"));
+    }
+    return res.json(new ApiResponse(200, electrician, "Electrician fetched successfully"));
+  } catch (error) {
+    return res.json(new ApiResponse(500, error, "internal server error"));
+  }
+})
