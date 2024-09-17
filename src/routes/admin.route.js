@@ -11,7 +11,7 @@ router.route("/get-open-complaints").get(getOpenComplaints)
 router.route("/get-closed-complaints").get(getClosedComplaints)
 router.route("/delete-electrician").delete(deleteElectrician)
 router.route("/delete-complaint").delete(deleteComplaint)
-router.route("/login-electrician").delete(loginElectrician)
-router.route("/get-electrician-by-id").delete(getElectricianById)
+router.route("/login-electrician").get(loginElectrician)
+router.route("/get-electrician-by-id").get(getElectricianById)
 
 export default router
